@@ -1,5 +1,6 @@
 FROM daocloud.io/library/ubuntu:14.04
 
+RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && echo 'Asia/Shanghai' >/etc/timezone
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
 COPY sources.list /etc/apt/
 RUN apt-get update
