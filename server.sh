@@ -4,6 +4,8 @@
 
 /usr/bin/mongod --fork --config /etc/mongod.conf
 
+/usr/bin/redis-cli flushall
+
 cd /root/gamepath
 
 [ ! -e /root/.npm_rebuild ] && npm rebuild && touch /root/.npm_rebuild
