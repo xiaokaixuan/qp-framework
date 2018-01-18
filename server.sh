@@ -8,7 +8,7 @@
 
 cd /root/gamepath
 
-[ ! -e /root/.npm_rebuild ] && npm rebuild && touch /root/.npm_rebuild
+[ ! -e /root/.npm_rebuild -a -e node_modules ] && npm rebuild && touch /root/.npm_rebuild
 
 [ -e node_modules/.bin/memdbcluster ] && node_modules/.bin/memdbcluster start -c config/memdb.conf.js && sleep 1
 
