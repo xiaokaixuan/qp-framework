@@ -15,7 +15,7 @@ WORKDIR /root/download/node-v4.4.7-linux-x64
 RUN cp -r bin include lib share /usr/local/
 WORKDIR /root
 
-RUN mkdir -p /root/.node-gyp && cp -r /root/download/node-v4.4.7 /root/.node-gyp/4.4.7
+RUN mkdir -p /root/.node-gyp && cp -r /root/download/node-v4.4.7 /root/.node-gyp/4.4.7 && echo 9 >/root/.node-gyp/4.4.7/installVersion
 
 COPY server.sh /root/
 RUN chmod +x /root/server.sh
