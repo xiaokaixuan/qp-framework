@@ -2,7 +2,7 @@
 
 /usr/bin/redis-server /etc/redis.conf
 
-/usr/bin/mongod --fork --bind_ip 0.0.0.0 --dbpath /var/lib/mongodb --logpath /var/log/mongodb/mongodb.log
+/usr/bin/mongod --fork --bind_ip 0.0.0.0 --dbpath /var/lib/mongodb --logpath /var/log/mongodb/mongod.log
 
 /usr/bin/redis-cli flushall
 
