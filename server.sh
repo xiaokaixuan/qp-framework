@@ -18,7 +18,9 @@ sleep 1 && [ -e node_modules/.bin/pomelo ] && node_modules/.bin/pomelo start "$@
 
 PID0=$!
 
-trap '[ -e node_modules/.bin/memdbcluster ] && node_modules/.bin/memdbcluster stop -c config/memdb.conf.js; [ "$PID0" -o "$PID1" -o "$PID2" ] && kill $PID0 $PID1 $PID2' SIGINT SIGTERM
+PIDS=`pgrep node`
+
+trap '[ -e node_modules/.bin/memdbcluster ] && node_modules/.bin/memdbcluster stop -c config/memdb.conf.js; [ "$PIDS" -o "$PID1" -o "$PID2" ] && kill $PIDS $PID1 $PID2 2>/dev/null' SIGINT SIGTERM
 
 wait $PID0
 wait $PID1
