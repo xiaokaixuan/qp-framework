@@ -6,7 +6,7 @@
 
 PID1=`pgrep redis-server` PID2=`pgrep mongod`
 
-/usr/bin/redis-cli flushall
+sleep 1 && /usr/bin/redis-cli flushall
 
 cd /root/gamepath
 
