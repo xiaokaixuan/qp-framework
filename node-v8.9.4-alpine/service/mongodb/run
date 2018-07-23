@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec /usr/bin/mongod --quiet --bind_ip 0.0.0.0 --dbpath /var/lib/mongodb --logpath /var/log/mongodb/mongod.log

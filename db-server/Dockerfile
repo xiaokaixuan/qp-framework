@@ -5,7 +5,7 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.old
 COPY sources.list /etc/apt/
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y redis-server 2>/dev/null \
+    && apt-get install --no-install-recommends -y runit redis-server 2>/dev/null \
     && apt-get clean
 
 RUN mkdir /root/download
@@ -13,15 +13,16 @@ RUN mkdir /root/download
 ADD mongodb_v3.2.9.tar.gz /root/download/
 
 RUN dpkg -i /root/download/*.deb 2>/dev/null \
-    && sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf /etc/redis/redis.conf
+    && sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf /etc/redis/redis.conf \
+    && echo 'save ""' >> /etc/redis/redis.conf
 
-COPY server.sh /root/
-RUN chmod +x /root/server.sh
+ADD service /root/service
+
+RUN find /root/service -type f -name 'run' -exec chmod +x {} \;
 
 VOLUME ["/var/lib/mongodb"]
 
 EXPOSE 27017
 EXPOSE 6379
 
-ENTRYPOINT ["/root/server.sh"]
-
+CMD ["runsvdir", "/root/service"]
