@@ -10,7 +10,7 @@ RUN apt-get update \
 
 RUN mkdir /root/download /root/gamepath
 
-ADD db-server/mongodb_v3.2.9.tar.gz node-v8.9.4-linux-x64.tar.gz node-v8.9.4-headers.tar.gz /root/download/
+ADD db-server/mongodb_v3.2.9.tar.gz db-server/node-v8.9.4-linux-x64.tar.gz node-v8.9.4-headers.tar.gz /root/download/
 
 RUN dpkg -i /root/download/*.deb 2>/dev/null \
     && sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf /etc/redis/redis.conf \
@@ -34,6 +34,8 @@ VOLUME ["/root/gamepath", "/var/lib/mongodb"]
 
 EXPOSE 27017
 EXPOSE 6379
+
+ENV DB_SERVER=
 
 ENTRYPOINT ["/root/server.sh"]
 

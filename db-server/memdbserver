@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd /root/gamepath
+
+./node_modules/.bin/memdbcluster $1 -c ./config/memdb.conf.js
+

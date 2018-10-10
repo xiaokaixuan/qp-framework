@@ -10,13 +10,13 @@ RUN apt-get update \
 
 RUN mkdir /root/download /root/gamepath
 
-ADD mongodb_v3.2.9.tar.gz node-v4.4.7-linux-x64.tar.gz /root/download/
+ADD mongodb_v3.2.9.tar.gz node-v8.9.4-linux-x64.tar.gz /root/download/
 
 RUN dpkg -i /root/download/*.deb 2>/dev/null \
     && sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf /etc/redis/redis.conf \
     && echo 'save ""' >> /etc/redis/redis.conf
 
-WORKDIR /root/download/node-v4.4.7-linux-x64
+WORKDIR /root/download/node-v8.9.4-linux-x64
 RUN cp -r bin include lib share /usr/local/
 WORKDIR /root
 
