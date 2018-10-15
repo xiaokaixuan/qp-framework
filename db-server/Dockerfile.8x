@@ -5,7 +5,7 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.old
 COPY sources.list /etc/apt/
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y runit redis-server 2>/dev/null \
+    && apt-get install --no-install-recommends -y runit redis-server lsof 2>/dev/null \
     && apt-get clean
 
 RUN mkdir /root/download /root/gamepath
