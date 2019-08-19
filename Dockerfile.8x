@@ -10,22 +10,22 @@ RUN apt-get update \
 
 RUN mkdir /root/download /root/gamepath
 
-ADD db-server/mongodb_v3.2.9.tar.gz db-server/node-v8.9.4-linux-x64.tar.gz node-v8.9.4-headers.tar.gz /root/download/
+ADD db-server/mongodb_v3.2.9.tar.gz db-server/node-v8.16.1-linux-x64.tar.gz node-v8.16.1-headers.tar.gz /root/download/
 
 RUN dpkg -i /root/download/*.deb 2>/dev/null \
     && sed -i 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf /etc/redis/redis.conf \
     && echo 'save ""' >> /etc/redis/redis.conf
 
-WORKDIR /root/download/node-v8.9.4-linux-x64
+WORKDIR /root/download/node-v8.16.1-linux-x64
 RUN cp -r bin include lib share /usr/local/
 WORKDIR /root
 
 RUN mkdir -p /root/.node-gyp \
-    && cp -r /root/download/node-v8.9.4 /root/.node-gyp/8.9.4 \
-    && echo 9 >/root/.node-gyp/8.9.4/installVersion
+    && cp -r /root/download/node-v8.16.1 /root/.node-gyp/8.16.1 \
+    && echo 9 >/root/.node-gyp/8.16.1/installVersion
 
 ADD db-server/service /root/service
-COPY server.sh /root/
+COPY server_hi.sh /root/server.sh
 
 RUN find /root/service -type f -name 'run' -exec chmod +x {} \; \
     && chmod +x /root/server.sh
